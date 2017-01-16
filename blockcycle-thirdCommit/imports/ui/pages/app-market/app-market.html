@@ -1,0 +1,43 @@
+<template name="App_market">
+    <h1>Sell a domain</h1>
+    <form class="sellDomain">
+        <div class="form-group">
+            <label for="domain">Domain</label>
+            <select id="domain" class="form-control">
+                {{#each userDomains}}
+                    <option value="{{ this }}">{{ this }}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-success">Sell</button>
+    </form>
+
+    <h1>Domains for sale</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width: 20%">Domain</th>
+                <th style="width: 50%">Owner</th>
+                <th style="width: 30%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each domainsForSale}}
+                <tr>
+                    <td>{{ this.domain }}</td>
+                    <td>{{ this.seller }}</td>
+                    <td style="padding-top: 5px; padding-bottom: 5px;">
+                        <form class="buyDomain">
+                            <input type="hidden" id="saleId" value="{{ this.saleId }}" />
+                            <button type="submit" class="btn btn-success">{{ this.price }} Ether</button>
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</template>
