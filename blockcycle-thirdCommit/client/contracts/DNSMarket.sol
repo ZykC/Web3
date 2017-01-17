@@ -35,7 +35,7 @@ contract DNSMarket {
         nextSaleId++;
     }
 
-    function buy(uint _saleId) payable {
+    function buy(uint _saleId) {
         if (sales[_saleId].seller == 0) throw;
         if (msg.value < sales[_saleId].price) throw;
 
