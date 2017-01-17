@@ -231,13 +231,13 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.new = function() {
     if (this.currentProvider == null) {
-      throw new Error("ConvertLib error: Please call setProvider() first before calling new().");
+      throw new Error("DNSMarket error: Please call setProvider() first before calling new().");
     }
 
     var args = Array.prototype.slice.call(arguments);
 
     if (!this.unlinked_binary) {
-      throw new Error("ConvertLib error: contract binary not set. Can't deploy new instance.");
+      throw new Error("DNSMarket error: contract binary not set. Can't deploy new instance.");
     }
 
     var regex = /__[^_]+_+/g;
@@ -256,7 +256,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         return name != arr[index + 1];
       }).join(", ");
 
-      throw new Error("ConvertLib contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of ConvertLib: " + unlinked_libraries);
+      throw new Error("DNSMarket contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of DNSMarket: " + unlinked_libraries);
     }
 
     var self = this;
@@ -297,7 +297,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.at = function(address) {
     if (address == null || typeof address != "string" || address.length != 42) {
-      throw new Error("Invalid address passed to ConvertLib.at(): " + address);
+      throw new Error("Invalid address passed to DNSMarket.at(): " + address);
     }
 
     var contract_class = this.web3.eth.contract(this.abi);
@@ -308,7 +308,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
 
   Contract.deployed = function() {
     if (!this.address) {
-      throw new Error("Cannot find deployed address: ConvertLib not deployed or address not set.");
+      throw new Error("Cannot find deployed address: DNSMarket not deployed or address not set.");
     }
 
     return this.at(this.address);
@@ -353,30 +353,113 @@ var SolidityEvent = require("web3/lib/web3/event.js");
         "constant": false,
         "inputs": [
           {
-            "name": "amount",
-            "type": "uint256"
+            "name": "_newDNSRegistryAddress",
+            "type": "address"
+          }
+        ],
+        "name": "changeRegistry",
+        "outputs": [],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_dns",
+            "type": "string"
           },
           {
-            "name": "conversionRate",
+            "name": "price",
             "type": "uint256"
           }
         ],
-        "name": "convert",
+        "name": "sell",
+        "outputs": [],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "name": "sales",
         "outputs": [
           {
-            "name": "convertedAmount",
+            "name": "dns",
+            "type": "string"
+          },
+          {
+            "name": "seller",
+            "type": "address"
+          },
+          {
+            "name": "price",
             "type": "uint256"
           }
         ],
         "payable": false,
         "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_saleId",
+            "type": "uint256"
+          }
+        ],
+        "name": "buy",
+        "outputs": [],
+        "payable": true,
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "nextSaleId",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "name": "_DNSRegistryAddress",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x6060604052346000575b6076806100176000396000f300606060405263ffffffff60e060020a60003504166396e4ee3d81146022575b6000565b602e6004356024356040565b60408051918252519081900360200190f35b8181025b929150505600a165627a7a723058207e1b90e78e1d2197b7a4851629f82f45614de7a3f9ebde0fcd20ea19493486b30029",
+    "unlinked_binary": "0x6060604052600060015534610000576040516020806106f483398101604052515b60038054600160a060020a03808416600160a060020a0319928316179092556002805433909316929091169190911790555b505b610691806100636000396000f3006060604052361561005c5763ffffffff60e060020a60003504166315554c5581146100615780638da5cb5b1461007c5780639f656321146100a5578063b5f522f7146100fc578063d96a094a146101ac578063deb077b9146101b9575b610000565b346100005761007a600160a060020a03600435166101d8565b005b34610000576100896101f7565b60408051600160a060020a039092168252519081900360200190f35b346100005761007a600480803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843750949650509335935061020692505050565b005b346100005761010c600435610423565b60408051600160a060020a03841660208201529081018290526060808252845460026000196101006001841615020190911604908201819052819060808201908690801561019b5780601f106101705761010080835404028352916020019161019b565b820191906000526020600020905b81548152906001019060200180831161017e57829003601f168201915b505094505050505060405180910390f35b61007a60043561044a565b005b34610000576101c661065f565b60408051918252519081900360200190f35b60038054600160a060020a031916600160a060020a0383161790555b50565b600254600160a060020a031681565b60035460408051600060209182015290517f52876935000000000000000000000000000000000000000000000000000000008152600481018281528551602483015285518694600160a060020a033381169591169363528769359387939092839260440191908501908083838215610299575b80518252602083111561029957601f199092019160209182019101610279565b505050905090810190601f1680156102c55780820380516001836020036101000a031916815260200191505b5092505050602060405180830381600087803b156100005760325a03f11561000057505060405151600160a060020a031691909114905061030557610000565b60606040519081016040528084815260200133600160a060020a03168152602001838152506000600060015481526020019081526020016000206000820151816000019080519060200190828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061039157805160ff19168380011785556103be565b828001600101855582156103be579182015b828111156103be5782518255916020019190600101906103a3565b5b506103df9291505b808211156103db57600081556001016103c7565b5090565b5050602082015160018281018054600160a060020a031916600160a060020a03909316929092179091556040909201516002909101558054810190555b5b5b505050565b600060208190529081526040902060018101546002820154600160a060020a039091169083565b600081815260208190526040902060010154600160a060020a0316151561047057610000565b60008181526020819052604090206002015434101561048e57610000565b60008181526020819052604080822060018101546002909101549151600160a060020a039091169282156108fc02929190818181858888f19350505050156104d557610000565b60035460008281526020818152604080832081519092019290925281517f42ba518b00000000000000000000000000000000000000000000000000000000815233600160a060020a03818116602484015260048301948552835460026000196001831615610100020190911604604484018190529516946342ba518b9491928291606490910190859080156105ab5780601f10610580576101008083540402835291602001916105ab565b820191906000526020600020905b81548152906001019060200180831161058e57829003601f168201915b50509350505050602060405180830381600087803b156100005760325a03f1156100005750505060008181526020819052604081208054828255909190829060026000196101006001841615020190911604601f81901061060c575061063e565b601f01602090049060005260206000209081019061063e91905b808211156103db57600081556001016103c7565b5090565b5b5050600181018054600160a060020a031916905560006002909101555b50565b600154815600a165627a7a72305820dad9d22caafc90ebf2a7d1f35301e4eb510d744e5ead2702973e9e6d07a9573d0029",
     "events": {},
-    "updated_at": 1484681112134,
+    "updated_at": 1484681112141,
     "links": {},
-    "address": "0x468bc0d8b69181ac6527bec6b8efc3ecc333d737"
+    "address": "0x1f6bf65f33499ec2303e508af7a2b0de146df1bc"
   }
 };
 
@@ -461,7 +544,7 @@ var SolidityEvent = require("web3/lib/web3/event.js");
     Contract.links[name] = address;
   };
 
-  Contract.contract_name   = Contract.prototype.contract_name   = "ConvertLib";
+  Contract.contract_name   = Contract.prototype.contract_name   = "DNSMarket";
   Contract.generated_with  = Contract.prototype.generated_with  = "3.2.0";
 
   // Allow people to opt-in to breaking changes now.
@@ -501,6 +584,6 @@ var SolidityEvent = require("web3/lib/web3/event.js");
   } else {
     // There will only be one version of this contract in the browser,
     // and we can use that.
-    window.ConvertLib = Contract;
+    window.DNSMarket = Contract;
   }
 })();
