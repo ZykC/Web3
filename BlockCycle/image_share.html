@@ -1,0 +1,145 @@
+<head>
+  <title>block_cycle</title>
+</head>
+
+<body>
+{{> image_add_form}}
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+   {{> loginButtons}}
+  </div>
+</nav>
+
+  <div class="container js-container" >
+
+    <h1>Welcome to BlockCycle {{username}}!</h1>
+
+    {{> images}} 
+
+    {{> image_acq_form}}
+</div>
+</body>
+
+<template name="image_acq_form">  
+  <div class="modal fade" id="image_acq_form">  
+    <div class="modal-dialog">  
+      <div class="modal-content"> 
+        <div class="modal-header">  
+          <div class="modal-title"> 
+          </div>  
+        </div>  
+      <div class="modal-body">         
+        <form class="js-acq-image"> 
+        <div class="form-group">  
+         <label for="taker_address">Your address:</label>  
+          <textarea class="form-control" id="taker_address" placeholder="Describe the image here" name="taker_address"></textarea>  
+        </div>  
+          <button class="btn btn-success">save</button> 
+        </form>   
+      </div>  
+      <div class="modal-footer">  
+        <button class="btn btn-warning" data-dismiss="modal">cancel</button>  
+      </div>  
+      </div>  
+    </div>    
+  </div>
+</template>
+
+
+<template name="image_add_form">
+
+<div class="modal fade" id="image_add_form">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">
+        </div>
+      </div>
+      <div class="modal-body">       
+        <form class="js-add-image">
+
+        <div class="form-group">
+            <label for="img_src">Object image: </label>
+            <input type="text" class="form-control" id="img_src" placeholder="url" name="img_src"/>
+        </div>
+
+        <div class="form-group">
+            <label for="obj_name">Object name: </label>
+            <input type="text" class="form-control" id="obj_name" placeholder="url" name="obj_name"/>
+        </div>
+
+        <div class="form-group">
+            <label for="obj_desc">Object description: </label>
+            <input type="text" class="form-control" id="obj_desc" placeholder="url" name="obj_desc"/>
+        </div>
+
+        <div class="form-group">
+            <label for="obj_address">Object address: </label>
+            <input type="text" class="form-control" id="obj_address" placeholder="url" name="obj_address"/>
+        </div>
+
+        <div class="form-group">
+            <label for="obj_price">Object price: </label>
+            <input type="text" class="form-control" id="obj_price" placeholder="url" name="obj_price"/>
+        </div>
+
+          <button class="btn btn-success">save</button>
+        </form> 
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-warning" data-dismiss="modal">cancel</button>
+      </div>  
+      </div>
+    </div>
+  </div>
+</template>
+
+
+<template name="images">
+  {{#if currentUser}}
+  <button class="btn btn-success js-show-image-form">add image</button>
+  {{/if}}
+   <h2>
+   {{#if filtering_images}}
+    Showing images by user {{getFilterUser}}. <a href="#" class="js-unset-image-filter">Show all images</a>
+   {{/if}}
+  </h2>
+ 
+  <div class="row">
+  {{#each images}}
+  <div class="col-xs-12 col-md-3" id="{{_id}}">
+    <div class="thumbnail">
+
+      <img class="js-image thumbnail-img"  src="{{img_src}}" 
+      alt="{{img_alt}}" /> 
+        
+      <div class="caption">           
+             <h3>{{obj_name}}</h3>
+
+          <p>
+            Sourceur: {{createdBy}}
+          </p>
+
+          <p>
+            Address: 
+            {{obj_address}}
+          </p>
+
+          <p>
+            Price: 
+            {{obj_price}}
+          </p>
+
+           <button class="js-del-image btn btn-warning">delete</button>
+
+          {{#if currentUser}}
+          <button class="js-acq-image-form btn btn-success ">acq image</button>
+          {{/if}}
+
+      </div>
+     </div>
+    </div> <!-- / col -->
+  {{/each}}
+</div> <!-- / row -->
+  </template>
