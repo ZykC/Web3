@@ -118,23 +118,29 @@
              <h3>{{obj_name}}</h3>
 
           <p>
-            Sourceur: {{createdBy}}
+            <strong>Sourceur:</strong> {{createdBy}}
           </p>
 
           <p>
-            Address: 
+            <strong>Description:</strong>
+            {{obj_desc}}
+          </p>
+
+          <p>
+          <strong>Address:</strong>
+            
             {{obj_address}}
           </p>
 
           <p>
-            Price: 
+          <strong>Price:</strong> 
             {{obj_price}}
           </p>
 
     
 
           {{#if currentUser}}
-          <button class="js-acq-image-form btn btn-success ">acq object</button>
+          <button class="js-acq-image-form btn btn-success ">acquire object</button>
           {{/if}}
 
       </div>

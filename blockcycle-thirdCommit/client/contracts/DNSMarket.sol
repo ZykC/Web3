@@ -14,6 +14,7 @@ contract DNSMarket {
     function DNSMarket(address _DNSRegistryAddress) {
         dnsRegistry = DNSRegistry(_DNSRegistryAddress);
         owner = msg.sender;
+        
     }
 
     function changeRegistry(address _newDNSRegistryAddress) {

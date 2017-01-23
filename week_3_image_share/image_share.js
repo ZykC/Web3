@@ -141,6 +141,13 @@ if (Meteor.isClient) {
         taker_address = event.target.taker_address.value;
         object_address = this.obj_address;
         console.log("taker: "+taker_address+"object address:"+object_address);
+        myContract.bookMeterial(0, web3.eth.accounts[0], function(error, result){
+          if(!error)
+          console.log("resutl: "+result)
+          else
+          console.log("error: "+error)
+        })
+
         if (Meteor.user()){
 
           Transport.update({_id:identifier}, 
@@ -163,14 +170,17 @@ if (Meteor.isClient) {
         obj_desc = event.target.obj_desc.value;
         obj_address = event.target.obj_address.value;
         obj_price = event.target.obj_price.value;
-        myContract.addMeterial.call("obj_name", "img_src", "obj_desc", "obj_address", 10, function(error, result){
-          console.log(error);
-        });
+        myContract.addMeterial(obj_name, img_src, obj_desc, obj_address, 15, web3.eth.accounts[0], function(error, result){
+        if(!error)
+          console.log("resutl: "+result)
+        else
+          console.log("error: "+error)
+        })
+       // myContract.addMeterial.call("obj_name", "img_src", "obj_desc", "obj_address", 10, function(error, result){
+      //    console.log(error);
+      //  });
 
-        myContract.bookMeterial.call(0, function(error, result){
-          console.log(error);
-        });
-
+        
         console.log("src: "+img_src+" alt:"+img_alt);
         console.log("desc: "+obj_desc+" address:"+obj_address);
         console.log("price: "+obj_price);
