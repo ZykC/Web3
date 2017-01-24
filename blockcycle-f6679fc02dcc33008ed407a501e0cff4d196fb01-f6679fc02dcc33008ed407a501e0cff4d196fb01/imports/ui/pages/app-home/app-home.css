@@ -1,0 +1,30 @@
+.title{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #eceeef;
+    border-top:  1px outset lightgrey;
+}
+.logoRecycle{
+    width: 20px;
+    height: 20px;
+     
+}
+.glyphicon-bitcoin{
+    color: green !important;
+}
+.titleSmall{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 24px;
+    background-color: #eceeef;
+    border-bottom:  1px inset lightgrey;
+}
+.content{
+    padding-top: 50px;
+}
+.content > h1, h2{
+    color: #6D6C6B;
+    font-size: 30px;
+}

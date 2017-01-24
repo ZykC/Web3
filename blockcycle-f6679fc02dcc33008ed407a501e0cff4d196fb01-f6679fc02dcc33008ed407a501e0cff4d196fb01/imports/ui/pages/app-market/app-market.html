@@ -1,0 +1,55 @@
+<template name="App_market" class="market">
+      <h1 class="title">BlockCycle</h1>
+        <span class="titleSmall">
+            <span class="glyphicon glyphicon-bitcoin"></span>lockchain Recycle</span>
+    <div class="content">
+    <h1>Register material</h1>
+    <form class="sellDomain">
+
+
+<!--
+            <select id="domain" class="form-control">
+                {{#each userDomains}}
+                    <option value="{{ this }}">{{ this }}</option>
+                {{/each}}
+            </select>
+-->
+
+        <div class="form-group">
+
+             <label for="domain">Name</label>
+            <input type="text" id="name" name="name" class="form-control"/>
+
+            <label for="source">Source</label>
+            <input type="text" id="source" name="source" class="form-control"/>
+
+            <label for="source">Description</label>
+            <input type="text" id="description" name="description" class="form-control"/>
+
+            <label for="value">Co2 - environmental value</label>
+            <input type="text" id="value" name="value" class="form-control"/>
+
+            <label for="weight">Weight(kg)</label>
+            <input type="text" id="weight" name="weight" class="form-control"/>
+
+            <label for="volume">Volume(m^3)</label>
+            <input type="text" id="volume" name="volume" class="form-control"/>
+
+            <label for="volume">Price</label>
+            <input type="text" id="price" name="price" class="form-control"/>
+
+            <label for="img_src">Photo</label>
+            <input type="text" id="img_src" name="img_src" class="form-control"/>
+
+            <label for="picture">Picture</label>
+            <input type="file" name="datafile" size="40"/>
+
+        </div>
+        <button type="submit" class="btn btn-success sellDomain">Register material on the recycling market</button>
+    </form>
+
+  <div class="form-group hidden">
+      <label for=potreward id="preward">Potential award:{{this.potreward}} </label>
+    </div>
+    </div>
+</template>

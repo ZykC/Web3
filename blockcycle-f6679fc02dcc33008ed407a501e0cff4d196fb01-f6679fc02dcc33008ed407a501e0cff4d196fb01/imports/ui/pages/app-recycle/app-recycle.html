@@ -1,0 +1,38 @@
+<template name="App_recycle">
+      <h1 class="title">BlockCycle</h1>
+        <span class="titleSmall">
+            <span class="glyphicon glyphicon-bitcoin"></span>lockchain Recycle</span>
+    <div class="content">
+    <h2>Registered materials</h2>
+<table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Current owner</th>
+                <th>Number of transfers</th>
+                <th>Weight</th>
+                <th>Volume</th>
+                <th>Co2</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through each registered domain and add it to the table -->
+            {{#each registeredDomains}}
+                <tr>
+                    <td>{{ this.mname }}</td>
+                    <td>{{ this.status }}</td>
+                    <td>{{ this.owner }}</td>
+                    <td>{{ this.transfers }}</td>
+                    <td>{{ this.weight }}</td>
+                    <td>{{ this.volume }}</td>
+                    <td>{{ this.co2 }}</td>
+                    <td><button>Acquire</button></td>
+                    <td><button>Wait</button></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    </div>
+</template>
